@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/clarkfannin/Desktop/web-projects/generate-sine-c/sine'
+relocations:     []
+...
