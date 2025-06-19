@@ -4,7 +4,6 @@
 #include <stdint.h>
 
 #define SAMPLERATE 44100
-#define FREQ 440
 #define DURATION 3
 #define TOTALSAMPLES (SAMPLERATE * DURATION)
 
@@ -27,7 +26,8 @@ struct FormatChunk
     uint16_t bits_per_sample;
 };
 
-struct DataChunk {
+struct DataChunk
+{
     char chunk_id[4];
     uint32_t chunk_size;
 };
@@ -90,7 +90,30 @@ int main()
     for (int i = 0; i < TOTALSAMPLES; i++)
     {
         double time = (double)i / SAMPLERATE;
-        double sine_input = 2 * M_PI * FREQ * time;
+
+        double current_freq;
+        if (i < TOTALSAMPLES / 5)
+        {
+            current_freq = 293.66;
+        }
+        else if (i < (TOTALSAMPLES / 5) * 2)
+        {
+            current_freq = 196;
+        }
+        else if (i < (TOTALSAMPLES / 5) * 3)
+        {
+            current_freq = 220;
+        }
+        else if (i < (TOTALSAMPLES / 5) * 4)
+        {
+            current_freq = 329.63;
+        }
+        else
+        {
+            current_freq = 261.63;
+        };
+
+        double sine_input = 2 * M_PI * current_freq * time;
         double sine_result = sin(sine_input);
         double scaled_sine = sine_result * 32767;
         short audio_sample = (short)(scaled_sine);
