@@ -85,8 +85,6 @@ int main()
     fwrite(&riff_header, sizeof(struct RIFFheader), 1, file);
     fwrite(&format_chunk, sizeof(struct FormatChunk), 1, file);
     fwrite(&data_chunk, sizeof(struct DataChunk), 1, file);
-
-    printf("Total samples: %d\n", TOTALSAMPLES);
     for (int i = 0; i < TOTALSAMPLES; i++)
     {
         double time = (double)i / SAMPLERATE;
